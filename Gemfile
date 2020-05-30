@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'react_on_rails', '11.1.4' # Use the exact gem version to match npm version
+gem 'react_on_rails', '11.3.0' # Use the exact gem version to match npm version
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

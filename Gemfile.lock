@@ -144,7 +144,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    react_on_rails (11.1.4)
+    react_on_rails (11.3.0)
       addressable
       connection_pool
       execjs (~> 2.5)
@@ -221,7 +221,7 @@ DEPENDENCIES
   mysql2
   puma (~> 3.12)
   rails (~> 5.2.3)
-  react_on_rails (= 11.1.4)
+  react_on_rails (= 11.3.0)
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
