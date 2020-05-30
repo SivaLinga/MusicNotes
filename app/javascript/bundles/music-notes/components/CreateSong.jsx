@@ -2,72 +2,60 @@ import React from 'react';
 import MaterialTable from 'material-table';
 
 const CreateSong = () => {
-
-  const columns = [
+  const [columns, setColumns] = React.useState([
     { title: 'Name', field: 'name' },
-    { title: 'Surname', field: 'surname' },
+    { title: 'Surname', field: 'surname', initialEditValue: 'initial edit value' },
     { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
     {
       title: 'Birth Place',
       field: 'birthCity',
       lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
     },
-  ];
+  ]);
 
-  const data = [
+  const [data, setData] = React.useState([
     { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-    {
-      name: 'Zerya Betül',
-      surname: 'Baran',
-      birthYear: 2017,
-      birthCity: 34,
-    },
-  ];
-
+    { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
+  ]);
   return (
     <MaterialTable
-      title="Editable Example"
+      title="Editable Preview"
       columns={columns}
       data={data}
       editable={{
-        onRowAdd: (newData) =>
-          new Promise((resolve) => {
+        onRowAdd: newData =>
+          new Promise((resolve, reject) => {
             setTimeout(() => {
+              setData([...data, newData]);
+              
               resolve();
-              // setState((prevState) => {
-              //   const data = [...prevState.data];
-              //   data.push(newData);
-              //   return { ...prevState, data };
-              // });
-            }, 600);
+            }, 1000)
           }),
         onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
+          new Promise((resolve, reject) => {
             setTimeout(() => {
+              const dataUpdate = [...data];
+              const index = oldData.tableData.id;
+              dataUpdate[index] = newData;
+              setData([...dataUpdate]);
+
               resolve();
-              // if (oldData) {
-              //   setState((prevState) => {
-              //     const data = [...prevState.data];
-              //     data[data.indexOf(oldData)] = newData;
-              //     return { ...prevState, data };
-              //   });
-              // }
-            }, 600);
+            }, 1000)
           }),
-        onRowDelete: (oldData) =>
-          new Promise((resolve) => {
+        onRowDelete: oldData =>
+          new Promise((resolve, reject) => {
             setTimeout(() => {
-              resolve();
-              // setState((prevState) => {
-              //   const data = [...prevState.data];
-              //   data.splice(data.indexOf(oldData), 1);
-              //   return { ...prevState, data };
-              // });
-            }, 600);
+              const dataDelete = [...data];
+              const index = oldData.tableData.id;
+              dataDelete.splice(index, 1);
+              setData([...dataDelete]);
+              
+              resolve()
+            }, 1000)
           }),
       }}
     />
   );
 };
 
-export default CreateSong;
+export default props => <CreateSong {...props} />;
